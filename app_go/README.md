@@ -11,6 +11,9 @@ Go 1.19
 1. Install requirements:
     ```
    go install github.com/joho/godotenv/cmd/godotenv@latest
+   go install github.com/prometheus/client_golang@latest
+   go install github.com/gorilla/mux@latest
+
     ```
 2. Create `.env` file with the following content (or you can change parameters):
    ```
@@ -50,8 +53,10 @@ Run app:
 ```
    docker run -d -p 8081:8081 --name app_go lnsfna/app_go:latest
    ```
-## Usage:
-Now you can go to `http://127.0.0.1:8081/` and `http://127.0.0.1:8081/joke` to test app.
+## Endpoints:
+* `/` - Main page, 
+* `/joke` - Page with random joke 
+* `/visits` - Page with visits counter 
 
 ## Unit-tests:
 Run `go-test -v` from `app_go` directory to check.

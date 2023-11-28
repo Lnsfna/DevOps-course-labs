@@ -17,7 +17,7 @@ COPY . .
 RUN CGO_ENABLED=0 GOOS=linux go build -o app_go && echo "user:x:1000:1000:User:/:" > /etc_passwd
 
 
-FROM scratch AS final
+FROM alpine:3.18.3 AS final
 
 # Set working directory
 WORKDIR /
@@ -30,6 +30,9 @@ COPY --from=build /app/templates  /templates
 
 # Copy passwd file
 COPY --from=build /etc_passwd /etc/passwd
+
+RUN mkdir /data && chown user /data
+VOLUME [ "/data" ]
 
 # Run container from non-root user
 USER user
